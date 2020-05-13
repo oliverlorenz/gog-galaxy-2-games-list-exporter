@@ -1,7 +1,8 @@
 .env
-node_modules
+/node_modules
 storage
-dist
+/dist
+/test
 /gogexporter-*
 /*.json
 !/package.json

@@ -1,8 +1,9 @@
-require('dotenv').config();
+import * as dotenv from 'dotenv';
 import { GogExporter } from './GogExporter';
 import { UniqueGameData } from './Database';
-// import { userInfo } from 'os';
-const { GoogleSpreadsheet } = require('google-spreadsheet');
+dotenv.config();
+// @ts-ignore
+import { GoogleSpreadsheet } from 'google-spreadsheet';
 
 
 (async() => {
@@ -24,19 +25,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
     });
     await doc.loadInfo();
     
-    let sheet;
-    let sheetId = Object.keys(doc.sheetsById).find((index) => {
-        return doc.sheetsById[index].title === process.env.NICKNAME
-    });
-    if (sheetId) sheet = doc.sheetsById[sheetId];
-    
-
-    if (!sheet) {
-        sheet = await doc.addSheet({
-            title: process.env.NICKNAME
-        })
-    }
-
+    const sheet = await getSheet(doc, process.env.NICKNAME as string);
     await sheet.clear();
     await sheet.setHeaderRow(headerValues);
     await sheet.addRows(speadsheetData);

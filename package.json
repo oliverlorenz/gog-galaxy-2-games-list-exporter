@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx typescript && npx pkg -o gogexporter -t node12-linux,node12-win dist/index.js"
+    "build": "npx typescript && npx pkg -o gogexporter -t node12-linux,node12-win dist/index.js",
+    "build-test": "npx typescript && npx pkg -d -o test/gogexporter -t node12-linux,node12-win dist/index.js"
   },
   "author": "",
   "license": "ISC",
